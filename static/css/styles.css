@@ -1,33 +1,78 @@
+/* Variables de Tema (Claro / Oscuro) */
+:root {
+  --bg-main: #ffffff;
+  --bg-card: #ffffff;
+  --bg-secondary: #f3f4f6;
+  --bg-input: #f9fafb;
+  --text-main: #374151;
+  --text-heading: #111827;
+  --text-muted: #4b5563;
+  --text-light: #6b7280;
+  --border-color: #e5e7eb;
+  --border-input: #d1d5db;
+  --accent: #2563eb;
+  --btn-primary-bg: #111827;
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover: #374151;
+  --status-bg: #dbeafe;
+  --status-text: #1e40af;
+}
+
+[data-theme="dark"] {
+  --bg-main: #0f172a;       
+  --bg-card: #1e293b;       
+  --bg-secondary: #334155;  
+  --bg-input: #0f172a;
+  --text-main: #cbd5e1;     
+  --text-heading: #f8fafc;  
+  --text-muted: #94a3b8;    
+  --text-light: #64748b;    
+  --border-color: #334155;
+  --border-input: #475569;
+  --accent: #3b82f6;        
+  --btn-primary-bg: #3b82f6;
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover: #2563eb;
+  --status-bg: #1e3a8a;
+  --status-text: #bfdbfe;
+}
+
 /* Estilo Profesional y Minimalista para Portafolio */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 body {
-    background-color: #ffffff;
+    background-color: var(--bg-main);
     margin: 0;
     font-family: 'Inter', sans-serif;
-    color: #374151;
+    color: var(--text-main);
     line-height: 1.7;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3 {
-    color: #111827;
+    color: var(--text-heading);
     font-weight: 600;
     letter-spacing: -0.025em;
+    transition: color 0.3s ease;
 }
 
 /* Header & Nav */
 header {
-    background-color: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
+    background-color: var(--bg-main);
+    border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .navbar {
     max-width: 1100px;
     margin: 0 auto;
     padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .navbar ul {
@@ -36,19 +81,33 @@ header {
     padding: 0;
     display: flex;
     gap: 2rem;
-    justify-content: flex-end;
+    align-items: center;
 }
 
 .navbar a {
     text-decoration: none;
-    color: #4b5563;
+    color: var(--text-muted);
     font-weight: 500;
     font-size: 0.95rem;
     transition: color 0.2s ease;
 }
 
 .navbar a:hover {
-    color: #2563eb;
+    color: var(--accent);
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
 }
 
 /* Layout */
@@ -72,13 +131,13 @@ header {
     font-size: 3.5rem;
     margin-bottom: 0.5rem;
     line-height: 1.1;
-    color: #111827;
+    color: var(--text-heading);
     letter-spacing: -0.05em;
 }
 
 .hero-subtitle {
     font-size: 1.5rem;
-    color: #2563eb;
+    color: var(--accent);
     font-weight: 500;
     margin-top: 0;
     margin-bottom: 1.5rem;
@@ -87,7 +146,7 @@ header {
 
 .hero-section p {
     font-size: 1.125rem;
-    color: #4b5563;
+    color: var(--text-muted);
     max-width: 700px;
     line-height: 1.8;
 }
@@ -97,13 +156,13 @@ header {
     font-size: 2.25rem;
     margin-bottom: 2rem;
     padding-bottom: 0.5rem;
-    border-bottom: 3px solid #2563eb;
+    border-bottom: 3px solid var(--accent);
     display: inline-block;
 }
 
 .about-content p {
     font-size: 1.1rem;
-    color: #4b5563;
+    color: var(--text-muted);
     line-height: 1.8;
     margin-bottom: 1.5rem;
     max-width: 800px;
@@ -117,10 +176,10 @@ header {
 }
 
 .project-item {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -128,15 +187,15 @@ header {
 
 .project-item:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
 }
 
 .project-image-wrapper {
     width: 100%;
     height: 200px;
     overflow: hidden;
-    background-color: #f3f4f6;
-    border-bottom: 1px solid #e5e7eb;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .project-image {
@@ -164,7 +223,7 @@ header {
 }
 
 .project-desc {
-    color: #4b5563;
+    color: var(--text-muted);
     font-size: 0.95rem;
     margin-bottom: 1.5rem;
     flex-grow: 1;
@@ -179,14 +238,15 @@ header {
 }
 
 .status-badge {
-    background-color: #dbeafe;
-    color: #1e40af;
+    background-color: var(--status-bg);
+    color: var(--status-text);
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .date-badge {
-    color: #6b7280;
+    color: var(--text-light);
     padding: 0.25rem 0;
 }
 
@@ -198,12 +258,13 @@ header {
 }
 
 .tech-tag {
-    background-color: #f3f4f6;
-    color: #374151;
+    background-color: var(--bg-secondary);
+    color: var(--text-main);
     font-size: 0.75rem;
     padding: 0.3rem 0.6rem;
     border-radius: 6px;
     font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .project-links {
@@ -223,22 +284,22 @@ header {
 }
 
 .primary-btn {
-    background-color: #111827;
-    color: #ffffff;
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
 }
 
 .primary-btn:hover {
-    background-color: #374151;
+    background-color: var(--btn-primary-hover);
 }
 
 .secondary-btn {
-    background-color: #f9fafb;
-    color: #374151;
-    border: 1px solid #d1d5db;
+    background-color: var(--bg-secondary);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
 }
 
 .secondary-btn:hover {
-    background-color: #f3f4f6;
+    background-color: var(--bg-input);
 }
 
 /* Formulario de contacto y Layout */
@@ -261,7 +322,7 @@ header {
 
 .contact-intro {
     font-size: 1.1rem;
-    color: #4b5563;
+    color: var(--text-muted);
     line-height: 1.8;
     margin-bottom: 2rem;
 }
@@ -278,14 +339,14 @@ header {
     align-items: center;
     gap: 0.75rem;
     text-decoration: none;
-    color: #374151;
+    color: var(--text-main);
     font-weight: 500;
     font-size: 1.05rem;
     transition: color 0.2s ease;
 }
 
 .social-btn:hover {
-    color: #2563eb;
+    color: var(--accent);
 }
 
 .download-cv {
@@ -295,11 +356,12 @@ header {
 }
 
 .contact-form {
-    background: #ffffff;
+    background: var(--bg-card);
     padding: 2rem;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .contact-form div {
@@ -310,7 +372,7 @@ header {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
-    color: #374151;
+    color: var(--text-main);
     font-size: 0.95rem;
 }
 
@@ -318,9 +380,10 @@ header {
 .contact-form textarea {
     width: 100%;
     padding: 0.75rem 1rem;
-    background: #f9fafb;
-    border: 1px solid #d1d5db;
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
     border-radius: 8px;
+    color: var(--text-main);
     font-size: 0.95rem;
     font-family: inherit;
     transition: all 0.2s ease;
@@ -330,9 +393,9 @@ header {
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
-    border-color: #2563eb;
+    border-color: var(--accent);
     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-    background: #ffffff;
+    background: var(--bg-card);
 }
 
 .contact-form textarea {
@@ -343,8 +406,8 @@ header {
 .contact-form button {
     width: 100%;
     padding: 0.875rem 2rem;
-    background-color: #111827;
-    color: #ffffff;
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
     border: none;
     border-radius: 8px;
     font-size: 1rem;
@@ -354,5 +417,5 @@ header {
 }
 
 .contact-form button:hover {
-    background-color: #374151;
+    background-color: var(--btn-primary-hover);
 }

@@ -8,11 +8,14 @@
 
 <header>
     <nav class="navbar">
+        <!-- Logo o Título opcional a la izquierda, pero dejaremos el nav como está o empujado -->
+        <div style="flex-grow: 1;"></div>
         <ul>
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#sobre-mi">Sobre mí</a></li>
             <li><a href="#proyectos">Proyectos</a></li>
             <li><a href="#contacto">Contacto</a></li>
+            <li><button id="theme-toggle" class="theme-btn" aria-label="Cambiar tema">🌙</button></li>
         </ul>
     </nav>
 </header>
@@ -117,4 +120,30 @@
         </div>
     </section>
 </main>
+
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Check if user has a preference saved or prefers dark mode at OS level
+    const currentTheme = localStorage.getItem('theme') || 
+                         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+        let theme = document.documentElement.getAttribute('data-theme');
+        if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+            themeToggle.textContent = '🌙';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            themeToggle.textContent = '☀️';
+        }
+    });
+</script>
 {% endblock %}
