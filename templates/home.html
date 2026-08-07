@@ -1,0 +1,120 @@
+{% extends 'layout.html'%}
+{% load static %}
+
+{% block title %} Portafolio {% endblock%}
+
+{% block body%}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+<header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#sobre-mi">Sobre mí</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="container">
+    <section id="inicio" class="hero-section section">
+        <h1>Hola, soy Bayron Fajardo.</h1>
+        <h2 class="hero-subtitle">Desarrollador Backend | Estudiante de Ingeniería de Sistemas (Séptimo Semestre)</h2>
+        <p>Construyo aplicaciones con Python y Django, enfocándome en backend, automatización e infraestructura. Actualmente profundizo en Linux, Docker, CI/CD y administración de servidores mientras desarrollo proyectos personales y un laboratorio propio para seguir aprendiendo.</p>
+    </section>
+    <section id="sobre-mi" class="section">
+        <h2 class="section-title">Sobre mí</h2>
+        <div class="about-content">
+            <p>Soy estudiante de Ingeniería de Sistemas con un fuerte interés por el desarrollo backend, DevOps y la ciberseguridad. Disfruto diseñando aplicaciones centradas en la lógica de negocio, la automatización y la infraestructura, priorizando soluciones mantenibles antes que interfaces complejas.</p>
+            <p>He desarrollado proyectos utilizando Python y Django, implementando arquitecturas MVC/MVT, autenticación, bases de datos relacionales y despliegues en contenedores con Docker. También he trabajado en el desarrollo de un ERP, herramientas de automatización con Selenium y proyectos personales orientados al análisis de datos y trading.</p>
+            <p>Actualmente estoy ampliando mis conocimientos en Linux, administración de servidores, Docker, GitHub Actions y despliegue continuo, construyendo un laboratorio personal sobre un servidor propio para profundizar en administración de sistemas y DevOps. A mediano plazo busco especializarme en backend e infraestructura, con el objetivo de evolucionar hacia roles relacionados con la ingeniería de plataformas y la ciberseguridad.</p>
+        </div>
+    </section>
+
+    <section id="proyectos" class="section">
+        <h2>Proyectos</h2>
+        <div class="projects-list">
+            {% if projects %}
+            {% for project in projects %}
+            <article class="project-item">
+                {% if project.media.first %}
+                <div class="project-image-wrapper">
+                    <img src="{{ project.media.first.file.url }}" alt="Imagen de {{ project.name }}" class="project-image">
+                </div>
+                {% endif %}
+                <div class="project-content">
+                    <h3>{{ project.name }}</h3>
+                    <p class="project-desc">{{ project.short_description }}</p>
+                    
+                    <div class="project-meta">
+                        <span class="status-badge">{{ project.get_status_display }}</span>
+                        <span class="date-badge">{{ project.start_date|date:"M Y" }}</span>
+                    </div>
+
+                    {% if project.technologies.all %}
+                    <div class="tech-stack">
+                        {% for tech in project.technologies.all %}
+                        <span class="tech-tag">{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="project-links">
+                        {% if project.repository_url %}
+                        <a href="{{ project.repository_url }}" target="_blank" rel="noopener noreferrer" class="link-btn secondary-btn">Repositorio</a>
+                        {% endif %}
+                        {% if project.live_url %}
+                        <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="link-btn primary-btn">Ver Proyecto</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+            {% else %}
+            <p>No se han registrado Proyectos todavía.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <section id="contacto" class="section">
+        <h2 class="section-title">Contacto</h2>
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <p class="contact-intro">¿Tienes un proyecto en mente, buscas un desarrollador para tu equipo o simplemente quieres charlar sobre tecnología? ¡No dudes en escribirme! Estoy abierto a nuevas oportunidades y siempre respondo rápido.</p>
+                
+                <div class="social-links">
+                    <a href="mailto:tu-correo@gmail.com" class="social-btn">
+                        ✉️ tu-correo@gmail.com
+                    </a>
+                    <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener noreferrer" class="social-btn">
+                        💼 LinkedIn
+                    </a>
+                    <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer" class="social-btn">
+                        🐱 GitHub
+                    </a>
+                </div>
+
+                <a href="#" class="link-btn primary-btn download-cv" download>📄 Descargar CV (PDF)</a>
+            </div>
+
+            <!-- Formulario conectado a Formspree (reemplaza 'tu-id-aqui' cuando crees la cuenta) -->
+            <form action="https://formspree.io/f/tu-id-aqui" method="POST" class="contact-form">
+                <div>
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Tu email" required>
+                </div>
+                <div>
+                    <label for="message">Mensaje:</label>
+                    <textarea id="message" name="message" placeholder="Tu mensaje" required></textarea>
+                </div>
+                <button type="submit">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+</main>
+{% endblock %}
