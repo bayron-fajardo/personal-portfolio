@@ -1,0 +1,104 @@
+# ==========================================
+# DOCKER - COMANDOS BÁSICOS
+# ==========================================
+
+# Construir una imagen a partir del Dockerfile
+docker build -t django-portfolio .
+
+# Ejecutar un contenedor en primer plano
+docker run django-portfolio
+
+# Ejecutar un contenedor en segundo plano
+docker run -d django-portfolio
+
+# Ejecutar un contenedor y eliminarlo automáticamente al detenerlo
+docker run --rm django-portfolio
+
+# Ejecutar en segundo plano, publicar puerto y eliminar al detenerlo
+docker run --rm -d -p 8000:8000 django-portfolio
+
+# Ejecutar con variables de entorno desde un archivo .env
+docker run -d -p 8000:8000 --env-file .env django-portfolio
+
+# Ejecutar con nombre personalizado
+docker run -d -p 8000:8000 --env-file .env --name web-env django-portfolio
+
+
+# ==========================================
+# CONTENEDORES
+# ==========================================
+
+# Listar contenedores actualmente ejecutándose
+docker ps
+
+# Listar todos los contenedores, incluidos los detenidos
+docker ps -a
+
+# Detener un contenedor
+docker stop [CONTAINER_NAME/ID]
+
+# Iniciar un contenedor detenido
+docker start [CONTAINER_NAME/ID]
+
+# Reiniciar un contenedor
+docker restart [CONTAINER_NAME/ID]
+
+# Eliminar un contenedor
+docker rm [CONTAINER_NAME/ID]
+
+
+# ==========================================
+# LOGS
+# ==========================================
+
+# Ver los logs de un contenedor
+docker logs [CONTAINER_NAME/ID]
+
+# Ver logs en tiempo real
+docker logs -f [CONTAINER_NAME/ID]
+
+
+# ==========================================
+# IMÁGENES
+# ==========================================
+
+# Listar imágenes
+docker images
+
+# Eliminar una imagen
+docker rmi [IMAGE_NAME/ID]
+
+
+# ==========================================
+# VOLÚMENES
+# ==========================================
+
+# Listar volúmenes
+docker volume ls
+
+# Crear un volumen
+docker volume create [VOLUME_NAME]
+
+
+# ==========================================
+# ACCEDER AL CONTENEDOR
+# ==========================================
+
+# Abrir una terminal dentro del contenedor
+docker exec -it [CONTAINER_NAME/ID] bash
+
+# Si bash no está disponible, utilizar sh
+docker exec -it [CONTAINER_NAME/ID] sh
+
+docker system 
+
+docker system prune (Eliminar Cache)
+
+docker system prune -a (Eliminar imagenes que utilizamos)
+
+
+
+
+# Crear bd postgres con volumen
+docker run -d --name postgres-container -e POSTGRES_PASSWORD=secreto -v datos-db:/var/lib/postgresql/data -p 5432:5432 postgres:16
+
